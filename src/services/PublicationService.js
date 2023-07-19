@@ -1,5 +1,4 @@
 import PublicationModel from "../models/PublicationModel";
-// import publicationModel from "../models/PublicationModel";
 
 const publicationModel =  new PublicationModel()
 

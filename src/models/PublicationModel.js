@@ -30,7 +30,3 @@ export default class PublicationModel {
         return rows
     }
 }
-
-// const publicationModel =  new PublicationModel()
-
-// export default publicationModel

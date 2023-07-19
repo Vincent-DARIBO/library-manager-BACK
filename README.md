@@ -5,3 +5,5 @@ Backend of the publication manager app
 ### architecture
     -   https://blog.logrocket.com/organizing-express-js-project-structure-better-productivity/
     - https://ludovicwyffels.dev/node-architecture/#architecture
+
+// TODO: fix the server
