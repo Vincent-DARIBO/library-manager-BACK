@@ -1,5 +1,4 @@
 import * as dotenv from 'dotenv'
-
 dotenv.config()
 
 import config from '../configs/index.js'
@@ -21,8 +20,6 @@ const poolConfig = {
 }
 
 // create the pool
-const createdPoom = mysql.createPool(poolConfig);
+const createdPool = mysql.createPool(poolConfig);
 // now get a Promise wrapped instance of that pool
-export const pool = createdPoom.promise();
-
-
+export const pool = createdPool.promise();

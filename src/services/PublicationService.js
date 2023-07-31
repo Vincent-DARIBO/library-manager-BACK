@@ -1,27 +1,29 @@
-import PublicationModel from "../models/PublicationModel";
+import PublicationModel from "../models/PublicationModel.js";
 
-const publicationModel =  new PublicationModel()
+
 
 export default class PublicationService {
-    constructor() { }
+    constructor() {
+        this.publicationModel = new PublicationModel()
+    }
     async add(title) {
         if (!title)
             return null
-        publicationModel.create(title)
+        this.publicationModel.create(title)
     }
     async list() {
-        return await publicationModel.getAll()
+        return await this.publicationModel.getAll()
     }
-    async edit(pubId) {
+    async edit(pubId, newTitle) {
+        return this.publicationModel.update(pubId, newTitle)
 
     }
     async search(name) {
-        return await pubsModel.getOne(name)
+        return await this.publicationModel.getOne(name)
 
     }
     async delete(pubId) {
-        return await publicationModel.delete(pubId)
+        return await this.publicationModel.delete(pubId)
     }
 }
 
-// export default publicationService

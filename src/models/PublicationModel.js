@@ -1,7 +1,7 @@
 import { pool } from '../db/pool.js'
 
 export default class PublicationModel {
-    constructor() {}
+    constructor() { }
 
     async create(title) {
         const [rows] = await pool.query(`INSERT INTO pubs (title)
@@ -10,8 +10,12 @@ export default class PublicationModel {
 
 
     }
-    update({ orderId, newValues }) {
+    async update(pubId, newTitle) {
 
+        const [rows] = await pool.query(`UPDATE pubs
+        SET title = '${newTitle}'
+        WHERE id = ${pubId}`)
+        return rows
 
     }
     async getAll() {
@@ -20,12 +24,12 @@ export default class PublicationModel {
     }
 
     async getOne(pubName) {
-        const [rows] = await pool.query(`SELECT title FROM pubs WHERE title LIKE "${pubName}%";`)
-        console.log("getOne", rows)
+        const [rows] = await pool.query(`SELECT * FROM pubs WHERE title LIKE "${pubName}%";`)
         return rows
 
     }
     async delete(pubId) {
+        console.log('je passe ' + pubId)
         const [rows] = await pool.query(`DELETE FROM pubs WHERE id = ${pubId};`)
         return rows
     }
