@@ -1,10 +1,10 @@
 import { Router } from "express";
 import PublicationService from "../services/PublicationService.js";
 
-export const publicationRouter = Router()
+export const publicationsRouter = Router()
 const publicationService = new PublicationService()
 
-publicationRouter.get('/', async (req, res) => {
+publicationsRouter.get('/', async (req, res) => {
     try {
         const rows = await publicationService.list()
         console.log('getAll', { rows })
@@ -15,7 +15,7 @@ publicationRouter.get('/', async (req, res) => {
     }
 })
 
-publicationRouter.get('/:name', async (req, res) => {
+publicationsRouter.get('/:name', async (req, res) => {
     if (!req.params.name)
         res.sendStatus(400).send('You must input an name')
     try {
@@ -29,7 +29,7 @@ publicationRouter.get('/:name', async (req, res) => {
 
 })
 
-publicationRouter.post('/', async (req, res) => {
+publicationsRouter.post('/', async (req, res) => {
     if (!req.query.title)
         res.sendStatus(400).send('You must input a title')
     try {
@@ -42,7 +42,7 @@ publicationRouter.post('/', async (req, res) => {
 
 })
 
-publicationRouter.put('/:id', async (req, res) => {
+publicationsRouter.put('/:id', async (req, res) => {
     if (!req.params.id || !req.query.title)
         res.sendStatus(400).send('You must input an id')
     try {
@@ -55,7 +55,7 @@ publicationRouter.put('/:id', async (req, res) => {
     }
 })
 
-publicationRouter.delete('/:id', async (req, res) => {
+publicationsRouter.delete('/:id', async (req, res) => {
     console.log("je PASSE");
     if (!req.params.id)
         res.sendStatus(400).send('You must input an id')
