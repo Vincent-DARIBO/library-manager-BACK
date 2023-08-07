@@ -33,8 +33,9 @@ The goal of this project is to help a librarian to manage its library
 ### Customers
 
 ```http
-  GET /customers - Returns the list of all registered customers 
+  GET /customers 
 ```
+- Returns the list of all registered customers 
 
 *Call return* : 
 ```ts
@@ -52,8 +53,9 @@ The goal of this project is to help a librarian to manage its library
 
 
 ```http
-  GET /customers/:first_name - Returns an array containing all the customers that have a part of the input in their first name
+  GET /customers/:first_name
 ```
+ - Returns an array containing all the customers that have a part of the input in their first name
 
 | Parameter | Type     | Description                   |
 | :-------- | :------- | :-----------------------------|
@@ -74,9 +76,12 @@ The goal of this project is to help a librarian to manage its library
 
 
 ```http
-  POST /customers/ - create a customer
+  POST /customers/ 
 ```
 
+- Create a customer
+
+  
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :--------------- |
 | `first_name`| `string - body param`| customer's first name. **Required** |
@@ -87,8 +92,9 @@ The goal of this project is to help a librarian to manage its library
 
 
 ```http
-  PUT /customers/ - edit customer's profile. At least one field must be entered
+  PUT /customers/ 
 ```
+- Edit customer's profile. At least one field must be entered
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :--------------- |
@@ -103,6 +109,8 @@ The goal of this project is to help a librarian to manage its library
   DELETE /customers/:id 
 ```
 
+- Delete a customer
+  
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :--------------- |
 | `first_name`| `number - param`| customer's ID. **Required** |  
@@ -111,8 +119,11 @@ The goal of this project is to help a librarian to manage its library
 ### Publications
 
 ```http
-  GET /publications - List of all registered publications
+  GET /publications 
 ```
+
+- List of all registered publications
+
 
 *Call return* : 
 ```ts
@@ -126,8 +137,9 @@ The goal of this project is to help a librarian to manage its library
 
 
 ```http
-  GET /customers/:title - Returns an array containing all the publication that have a part of the input in their title
+  GET /customers/:title 
 ```
+- Returns an array containing all the publication that have a part of the input in their title
 
 | Parameter | Type     | Description                   |
 | :-------- | :------- | :-----------------------------|
@@ -135,8 +147,9 @@ The goal of this project is to help a librarian to manage its library
 
 
 ```http
-  POST /customers/ - register a new publication
+  POST /customers/ 
 ```
+- Register a new publication
 
 | Parameter | Type     | Description                   |
 | :-------- | :------- | :-----------------------------|
@@ -145,6 +158,8 @@ The goal of this project is to help a librarian to manage its library
 ```http
   PUT /publications/:id 
 ```
+
+- Edit a publication title
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :--------------- |
@@ -156,6 +171,8 @@ The goal of this project is to help a librarian to manage its library
 ```http
   DELETE /publications/:id 
 ```
+
+- Delete a publication
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :--------------- |
