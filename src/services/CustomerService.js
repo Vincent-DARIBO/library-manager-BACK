@@ -18,7 +18,6 @@ export default class CustomeService {
     async edit(customerId, newInfos) {
 
         const result = await this.customerModel.update(customerId, newInfos)
-       console.log({result});
         if (!result)
             throw Error('Customer not found')
         else

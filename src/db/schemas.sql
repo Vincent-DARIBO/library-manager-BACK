@@ -1,4 +1,4 @@
-export const initScheme = `
+`
 CREATE TABLE IF NOT EXISTS customers (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(50),
@@ -6,11 +6,14 @@ CREATE TABLE IF NOT EXISTS customers (
   email VARCHAR(50),
   phone VARCHAR(50)
 );
+
 CREATE TABLE IF NOT EXISTS pubs (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   title VARCHAR(50)
 );
+
 CREATE TABLE IF NOT EXISTS orders (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   customer_id INT,
   quantity INT,
   status INT,
@@ -19,4 +22,3 @@ CREATE TABLE IF NOT EXISTS orders (
   FOREIGN KEY (publication_id) REFERENCES pubs(id)
 );
 `
-

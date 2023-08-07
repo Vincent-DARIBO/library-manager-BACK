@@ -14,7 +14,7 @@ export default class PublicationModel {
 
         const [rows] = await pool.query(`UPDATE pubs
         SET title = '${newTitle}'
-        WHERE id = ${pubId}`)
+        WHERE id = ${pubId};`)
         return rows
 
     }
@@ -29,7 +29,6 @@ export default class PublicationModel {
 
     }
     async delete(pubId) {
-        console.log('je passe ' + pubId)
         const [rows] = await pool.query(`DELETE FROM pubs WHERE id = ${pubId};`)
         return rows
     }

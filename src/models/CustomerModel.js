@@ -10,24 +10,23 @@ export default class CustomerModel {
 
 
     }
-    async update(customerId, newInfo) {
-        const [rows] = pool.query(`SELECT * FROM customers WHERE id = ${customerId}`)
-        console.log({ rows });
-        return []
-        // if (!customer[0]) {
-        //     return null
-        // }
-        // const updatedInfos = {
-        //     ...customer[,
-        //     ...newInfo
-        // }
-        // const [rows] = await pool.query(`UPDATE customers
-        // SET first_name = '${updatedInfos.firstName}',
-        //  last_name = '${updatedInfos.lastName}', 
-        //  email = '${updatedInfos.email}',
-        //  phone = '${updatedInfos.phone}'
-        // WHERE id = ${customerId}`)
-        // return rows
+    async update(customerId, newInfos) {
+        const [customer] = await pool.query(`SELECT * FROM customers WHERE id = ${customerId}`)
+
+        if (!customer[0]) {
+            return null
+        }
+        const updatedInfos = {
+            ...customer[0],
+            ...newInfos
+        }
+        const [rows] = await pool.query(`UPDATE customers
+        SET first_name = '${updatedInfos.firstName}',
+         last_name = '${updatedInfos.lastName}', 
+         email = '${updatedInfos.email}',
+         phone = '${updatedInfos.phone}'
+        WHERE id = ${customerId};`)
+        return rows
 
     }
     async getAll() {
@@ -44,7 +43,7 @@ export default class CustomerModel {
 
     async getByEmail(email) {
         const [rows] = await pool.query(`SELECT * FROM customers WHERE email LIKE "${email}%";`)
-        return rows
+        return rows[0] ?? null
 
     }
     async delete(customerId) {

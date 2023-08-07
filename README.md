@@ -7,3 +7,11 @@ Backend of the publication manager app
     - https://ludovicwyffels.dev/node-architecture/#architecture
 
 // TODO: fix the server
+
+
+
+order flow: 
+
+user create order
+        -> if an order with publication_id and customer_id already exist -> ask to edit this order
+        -> else create the order

@@ -1,7 +1,9 @@
 import express from "express"
+import bodyParser from "body-parser"
+
 import { publicationsRouter } from "./src/routes/publications.js"
 import { customersRouter } from "./src/routes/customers.js"
-import bodyParser from "body-parser"
+import { ordersRouter } from "./src/routes/orders.js"
 
 
 const app = express()
@@ -14,7 +16,8 @@ app.get('/', async (req, res) => {
 
 app.use('/publications', publicationsRouter)
 app.use('/customers', customersRouter)
+app.use('/orders', ordersRouter)
 
 app.listen(port, () => {
-    console.warn(`app listening on port ${port}`)
+    console.warn(`App listening on port ${port}`)
 })
