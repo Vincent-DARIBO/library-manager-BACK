@@ -10,7 +10,7 @@ The goal of this project is to help a librarian to manage its library
 
 🔐 Securtiy: 
     
-    - Access control using roles
+    - Role-based access system
     - Google authentication
     - Email authentication
     - Passwordless authentication
