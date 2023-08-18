@@ -172,18 +172,83 @@ The goal of this project is to help a librarian to manage its library
   DELETE /publications/:id 
 ```
 
-- Delete a publication
-
-| Parameter | Type     | Description                       |
+| Parameter | Type     | Description      |
 | :-------- | :------- | :--------------- |
 | `id`| `number - param`| publication's ID. **Required** |
 
 
 ### Orders
 
-Takes two numbers and returns the sum.
+```http
+  GET /orders - Returns the list of orders. If no query parameter specified the list of all orders is returned
+```
+| Parameter | Type            | Description      |
+| :-------- | :-------------- | :--------------- |
+| `publicationID`      | `number - query param`| publication's ID. **Optional** |
+| `customerId`      | `number - query param`| customer's ID. **Optional** |
+
+*Call return* : 
+```ts
+[
+    {
+        "id": number,
+        "customer_id": string | null,
+        "publication_id": string | null,
+        "quantity": string | null,
+        "status": 0 | 1 | 2 | 3 - respectively `not sent - sent - delivered - receive`
+    }
+]
+```
+
+```http
+  GET /orders/:id - Returns the associated order
+```
+| Parameter | Type            | Description               |
+| :-------- | :-------------- | :------------------------ |
+| `id`      | `number - param`| `order's ID. **Required** |
+
+*Call return* : 
+```ts
+    {
+        "id": number,
+        "customer_id": string | null,
+        "publication_id": string | null,
+        "quantity": string | null,
+        "status": 0 | 1 | 2 | 3 - respectively `not sent - sent - delivered - receive`
+    }
+```
+
+```http
+  POST /orders/ - create an order
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :--------------- |
+| `customerId`| `int - body param`| id of the customer that made the order **Required** |
+| `publicationId`| `int - body param`| id of the wanted publication. **Required** |
+| `status`| `int - body param`| status of the order 0 | 1 | 2 | 3 - respectively `not sent - sent - delivered - receive` **Required** |
+| `quantity`| `int - body param`| the number of wanted items **Required** |
 
 
+
+```http
+  PUT /orders/:id - edit an order
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :--------------- |
+| `id`      | `int - param`| the order id **Required** |
+| `status`  | `int - body param`| status of the order 0 | 1 | 2 | 3 - respectively `not sent - sent - delivered - receive` **Optional** |
+| `quantity`| `int - body param`| the number of wanted items **Optional** |
+:warning: Either the status or the quantity has to be specified :warning:
+
+```http
+  DELETE /orders/:id 
+```
+
+| Parameter | Type     | Description      |
+| :-------- | :------- | :--------------- |
+| `id`| `number - param`| orders's ID. **Required** |
 
 
 # publication-manager-BACK
@@ -193,6 +258,14 @@ Backend of the publication manager app
 ### architecture
     -  https://blog.logrocket.com/organizing-express-js-project-structure-better-productivity/
     - https://ludovicwyffels.dev/node-architecture/#architecture
+
+### role-base access control
+
+
+    - https://code.pieces.app/blog/role-based-access-systems-in-nodejs
+    - https://dev.to/richienabuk/how-to-implement-dynamic-role-based-access-control-rbac-in-express-js-rest-api-54fe
+    - https://learn.microsoft.com/en-us/azure/active-directory/external-identities/customers/how-to-web-app-role-based-access-control
+    - https://developer.auth0.com/resources/code-samples/api/express/basic-role-based-access-control/typescript#quick-auth-0-set-up
 
 // TODO: fix the server
 
