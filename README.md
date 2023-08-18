@@ -205,7 +205,7 @@ The goal of this project is to help a librarian to manage its library
 ```
 | Parameter | Type            | Description               |
 | :-------- | :-------------- | :------------------------ |
-| `id`      | `number - param`| `order's ID. **Required** |
+| `id`      | `number - param`| order's ID. **Required** |
 
 *Call return* : 
 ```ts
