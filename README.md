@@ -251,15 +251,13 @@ The goal of this project is to help a librarian to manage its library
 | `id`| `number - param`| orders's ID. **Required** |
 
 
-# publication-manager-BACK
-Backend of the publication manager app
 
 ## Ressources 
-### architecture
+### Architecture
     -  https://blog.logrocket.com/organizing-express-js-project-structure-better-productivity/
     - https://ludovicwyffels.dev/node-architecture/#architecture
 
-### role-base access control
+### Role-base access control
 
 
     - https://code.pieces.app/blog/role-based-access-systems-in-nodejs
