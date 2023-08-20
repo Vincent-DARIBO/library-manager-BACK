@@ -137,17 +137,17 @@ The goal of this project is to help a librarian to manage its library
 
 
 ```http
-  GET /customers/:title 
+  GET /publications/:title 
 ```
 - Returns an array containing all the publication that have a part of the input in their title
 
 | Parameter | Type     | Description                   |
 | :-------- | :------- | :-----------------------------|
-| `first_name`| `params` | entire or partial title|
+| `title`| `params` | entire or partial title|
 
 
 ```http
-  POST /customers/ 
+  POST /publications/ 
 ```
 - Register a new publication
 
