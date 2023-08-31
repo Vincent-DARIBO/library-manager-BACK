@@ -4,13 +4,15 @@ export default class CustomeService {
     constructor() {
         this.customerModel = new CustomerModel()
     }
-    async add({ firstName, lastName, email, phone }) {
-        if (!firstName || !lastName || !email || !phone)
+    async add({ first_name, last_name, email, phone }) {
+        if (!first_name || !last_name || !email || !phone)
             throw Error("Missing field")
-        const user = this.customerModel.getByEmail(email)
-        if (user)
+        const user = await this.customerModel.getByEmail(email)
+        if (user) {
+            console.log({ user });
             return null
-        return this.customerModel.create({ firstName, lastName, email, phone })
+        }
+        return await this.customerModel.create({ first_name, last_name, email, phone })
     }
     async list() {
         return await this.customerModel.getAll()

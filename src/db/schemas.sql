@@ -12,13 +12,22 @@ CREATE TABLE IF NOT EXISTS pubs (
   title VARCHAR(50)
 );
 
+CREATE TABLE IF NOT EXISTS global_orders (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  status enum('NOT_SENT', 'SENT', 'RECEIVED', 'DELIVERED'),
+  date VARCHAR(10)
+
+);
 CREATE TABLE IF NOT EXISTS orders (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   customer_id INT,
   quantity INT,
-  status INT,
+  status enum('NOT_SENT', 'SENT', 'RECEIVED', 'DELIVERED'),
   publication_id INT,
+  global_id INT,
   FOREIGN KEY (customer_id) REFERENCES customers(id),
-  FOREIGN KEY (publication_id) REFERENCES pubs(id)
+  FOREIGN KEY (publication_id) REFERENCES pubs(id),
 );
+
+
 `

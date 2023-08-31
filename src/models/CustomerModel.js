@@ -3,30 +3,30 @@ import { pool } from '../db/pool.js'
 export default class CustomerModel {
     constructor() { }
 
-    async create({ firstName, lastName, email, phone }) {
+    async create({ first_name, last_name, email, phone }) {
         const [rows] = await pool.query(`INSERT INTO customers (first_name, last_name, email, phone)
-         values(\"${firstName}\", \"${lastName}\", \"${email}\", \"${phone}\");`);
+         values(\"${first_name}\", \"${last_name}\", \"${email}\", \"${phone}\");`);
         return rows
 
 
     }
     async update(customerId, newInfos) {
-        const [customer] = await pool.query(`SELECT * FROM customers WHERE id = ${customerId}`)
-
-        if (!customer[0]) {
+        try {
+            const rows = await pool.query(`SELECT * FROM customers WHERE id = ${customerId}`).then(async ([customer]) => {
+                console.log({ customer: customer[0] });
+                if (!customer[0]) {
+                    return null
+                }
+                const updatedInfos = Object.entries(newInfos).map((item) => `${item[0]} = \'${item[1]}\'`).join(',')
+                const query = 'UPDATE customers SET ' + updatedInfos + ` WHERE id = ${customerId};`
+                const [updateQueryResult] = await pool.query(query)
+                return updateQueryResult
+            })
+            return rows
+        } catch (e) {
+            console.error(e);
             return null
         }
-        const updatedInfos = {
-            ...customer[0],
-            ...newInfos
-        }
-        const [rows] = await pool.query(`UPDATE customers
-        SET first_name = '${updatedInfos.firstName}',
-         last_name = '${updatedInfos.lastName}', 
-         email = '${updatedInfos.email}',
-         phone = '${updatedInfos.phone}'
-        WHERE id = ${customerId};`)
-        return rows
 
     }
     async getAll() {
