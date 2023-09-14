@@ -1,8 +1,11 @@
 import { Router } from "express";
 import OdersService from "../services/OrdersService.js";
+import { globalOrdersRouter } from "./globarOrders.js";
 
 export const ordersRouter = Router()
-const ordersService = new OdersService()
+export const ordersService = new OdersService()
+
+ordersRouter.use('/globals', globalOrdersRouter)
 
 ordersRouter.get('/', async (req, res) => {
     if (req.query.customerId) {
@@ -38,6 +41,7 @@ ordersRouter.get('/', async (req, res) => {
     }
 })
 
+
 ordersRouter.get('/:id', async (req, res) => {
     if (!req.params.id)
         res.sendStatus(400).send('You must input an id')
@@ -55,6 +59,7 @@ ordersRouter.get('/:id', async (req, res) => {
 })
 
 ordersRouter.post('/', async (req, res) => {
+
     if (!Object.keys(req.body).length) {
         res.status(400).send('You must input all the fields')
         return
@@ -65,8 +70,9 @@ ordersRouter.post('/', async (req, res) => {
             res.status(403).send(`Order already exists (${rows.id})`)
         }
         else
-            res.sendStatus(200)
+            res.sendStatus(201)
     } catch (e) {
+        console.log(e);
         res.sendStatus(400)
     }
 
@@ -88,6 +94,7 @@ ordersRouter.put('/:id', async (req, res) => {
         res.sendStatus(404)
     }
 })
+
 
 ordersRouter.delete('/:id', async (req, res) => {
     if (!req.params.id)

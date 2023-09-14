@@ -32,7 +32,7 @@ publicationsRouter.post('/', async (req, res) => {
         res.sendStatus(400).send('You must input a title')
     try {
         const rows = await publicationService.add(req.body.title)
-        res.sendStatus(200).send(rows)
+        res.sendStatus(201).send(rows)
     } catch (e) {
         console.error(e)
         res.sendStatus(500)

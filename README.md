@@ -265,7 +265,6 @@ The goal of this project is to help a librarian to manage its library
     - https://learn.microsoft.com/en-us/azure/active-directory/external-identities/customers/how-to-web-app-role-based-access-control
     - https://developer.auth0.com/resources/code-samples/api/express/basic-role-based-access-control/typescript#quick-auth-0-set-up
 
-// TODO: fix the server
 
 
 

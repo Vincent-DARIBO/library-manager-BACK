@@ -41,7 +41,7 @@ customersRouter.post('/', async (req, res) => {
             res.status(403).send("User already exists")
         }
         else {
-            res.sendStatus(200)
+            res.sendStatus(201)
         }
     } catch (e) {
         console.log("error", e)
