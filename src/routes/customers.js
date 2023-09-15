@@ -38,7 +38,7 @@ customersRouter.post('/', async (req, res) => {
     try {
         const rows = await customersService.add(req.body)
         if (!rows) {
-            res.status(403).send("User already exists")
+            res.send({status: 403, message: "User already exists"})
         }
         else {
             res.sendStatus(201)

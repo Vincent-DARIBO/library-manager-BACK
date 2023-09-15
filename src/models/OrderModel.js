@@ -57,26 +57,41 @@ export default class OrderModel {
     }
 
     async getGlobalsAll() {
-        const mapped = []
+        let mapped = []
         let index = undefined
 
-        const [rows] = await pool.query(`SELECT global_orders.id, global_orders.status, global_orders.created_at,  pubs.title, orders.quantity
+        const [rows] = await pool.query(`SELECT global_orders.id, global_orders.status, global_orders.created_at,  pubs.title, pubs.id AS pub_id, orders.quantity
         FROM ((global_orders INNER JOIN orders ON global_orders.id = orders.global_order_id)
         INNER JOIN pubs on orders.publication_id = pubs.id);`)
         rows.forEach((item) => {
             const { id, created_at, status, ...rest } = item
             if ((index = mapped.findIndex((item) => item.id === id)) !== -1) {
+
                 mapped[index]?.publications?.push(rest)
             }
             else {
                 mapped.push({ id, status, created_at, publications: [rest] })
             }
         })
+        mapped = mapped.map(item => {
+            const { publications } = item
+            const newPubs = []
+            let pubIndex = -1
+
+            publications.forEach(item => {
+                if ((pubIndex = newPubs.findIndex(pub => pub.pub_id === item.pub_id)) !== - 1) {
+                    newPubs.at(pubIndex).quantity += item.quantity
+
+                } else {
+                    newPubs.push(item)
+                }
+            })
+            return { ...item, publications: newPubs }
+        })
         return mapped
     }
 
     async getOne(orderId) {
-         console.log({orderId});
         const [rows] = await pool.query(`SELECT orders.id, customers.first_name, customers.last_name, pubs.title, orders.quantity
         FROM ((orders INNER JOIN customers ON orders.customer_id = customers.id)
         INNER JOIN pubs on orders.publication_id = pubs.id)

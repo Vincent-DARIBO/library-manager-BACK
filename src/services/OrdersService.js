@@ -7,7 +7,6 @@ export default class OdersService {
         this.orderModel = new OrderModel()
     }
     async add({ customerId, publicationId, status = OrderStatus.NOT_SENT, quantity }) {
-        console.log("ici");
         if (!customerId || !publicationId || !quantity)
             throw "Missing fields"
         return await this.orderModel.create({ customerId, publicationId, status, quantity })
