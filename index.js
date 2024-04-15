@@ -11,7 +11,7 @@ const port = 3000
 
 app.use(bodyParser.json())
 app.get('/', async (req, res) => {
-    res.send('Coucou je m\'appelle Vincent bienvenu sur mon API!')
+    res.send('Salut ! Bienvenue sur mon API!')
 })
 
 app.use('/publications', publicationsRouter)
